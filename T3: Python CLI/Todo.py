@@ -1,19 +1,31 @@
+#this library + commands to save the textfile to wherever the script is
+import os
+script_dir = os.path.dirname(os.path.abspath(__file__))
+filename = os.path.join(script_dir, "Todolist.txt")
 
-filename = r"C:\Users\layla\OneDrive\Desktop\M.I.A Training\Session 3 - Python and Git\Todolist.txt"
-tasks = []
+#array/list that stores tasks
+tasks = ["Fill up on gas", "Clean the interior", "Check on tires", "Attend Photoshoot"]
 
-with open(filename, "a") as f:
+#create file and save tasks if the array/list has any to record to file
+with open(filename, "w") as f:
+    f.write("     LIGHTNING MCQUEEN'S TO-DO LIST      \n")
+    # seeing as its 0 index, the numbering for order will be incremented by one
+    # the line after each task recorded in file will have the pending status unless McQueen chooses
+    # to change status to done
     for i in range(len(tasks)):
-        f.write("     LIGHTNING MCQUEEN'S TO-DO LIST      ")
         f.write(f"{i+1}) ")
         f.write(tasks[i] + "\n")
-        f.write("Unfinished \n")
+        f.write("Pending \n")
 
+#because there is no need to inspect lines or edit them, using f.read() is enough for just viewing the list as a block.
 def view_list():
     with open(filename, "r") as f:
         content = f.read()
         print(content)
 
+#to add a task, the order number must be known. That is calculated first, casting needed so that it isn't a float. 
+# f.readlines() is important because it stores each line as an element in a list, making it easiest way to find which task_number we are on,
+#then the task passed onto the function is appended onto the end of it
 def add_task(task):
     with open(filename, "r") as f:
         lines = f.readlines()
@@ -22,17 +34,21 @@ def add_task(task):
     with open(filename, "a") as f:
         f.write(f"{task_number}) ") 
         f.write(task + "\n")
-        f.write("Unfinished \n")
+        f.write("Pending \n")
     print("Here's your brand new long list now!\n")
     view_list()
 
+# same as past functions, f.readlines() is necessary to determine which task the task_number is pointing at
+# the status index is calculated to pin done which Pending should be turned into a done
 def mark_as_done(task_number):
     with open(filename, "r") as f:
         lines = f.readlines()
         stat_idx = (task_number - 1)* 2 + 1
 
         if stat_idx >= 0 and stat_idx< len(lines) :
+            #overwrite pending into a done
             lines[stat_idx] = "Done \n"
+            #rewrite the whole lines back into the folder
             with open(filename, "w") as f:
                 f.writelines(lines)
             print("Done and done, boss!")
@@ -40,6 +56,8 @@ def mark_as_done(task_number):
         else:
             print("No such task, Kachow!")
 
+#following same concept as past 2 functions, but using del functions the unwanted tasks and their status is removed 
+# then the file is rewritten
 def remove_task(task_number):
     with open(filename, "r") as f:
             lines = f.readlines()
@@ -56,12 +74,15 @@ def remove_task(task_number):
                 print("Task not found! Look again!")
 
 
-
+#this condition equals C--> while(1) and then being exited through a return -1 (here as break). 
+#Program is on loop until user decides to exit
 while True:
+    # The startup menu from which the user chooses a certain command 
     print("     LIGHTNING MCQUEEN'S TO-DO LIST      ")
     print("1. Add a task \n2. View my to-do list \n3. Mark a task as done \n4. Remove a task \n5. Quit")
     choice = int(input("What's the move, champ?! (1/2/3/4/5): "))
 
+    #command number decides which functions are called
     if choice == 1:
         task = input("Alright, boss! Another task! Shoot: ")
         add_task(task)
@@ -77,8 +98,8 @@ while True:
         remove_task(task_number)
     elif choice == 5:
         print("Leaving so soon?! Well, bye bye!\n")
-        f.close("Todolist.txt")
         break
+    #default case for if the input is wrong
     else:
         print("No can do! Try again!")
 
