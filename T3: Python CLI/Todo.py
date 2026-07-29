@@ -7,15 +7,17 @@ filename = os.path.join(script_dir, "Todolist.txt")
 tasks = ["Fill up on gas", "Clean the interior", "Check on tires", "Attend Photoshoot"]
 
 #create file and save tasks if the array/list has any to record to file
-with open(filename, "w") as f:
-    f.write("     LIGHTNING MCQUEEN'S TO-DO LIST      \n")
-    # seeing as its 0 index, the numbering for order will be incremented by one
-    # the line after each task recorded in file will have the pending status unless McQueen chooses
-    # to change status to done
-    for i in range(len(tasks)):
-        f.write(f"{i+1}) ")
-        f.write(tasks[i] + "\n")
-        f.write("Pending \n")
+#tasks are written only if the file is new, or it doesnt exist, or empty
+if not os.path.exists(filename):
+    with open(filename, "w") as f:
+        f.write("     LIGHTNING MCQUEEN'S TO-DO LIST      \n")
+        # seeing as its 0 index, the numbering for order will be incremented by one
+        # the line after each task recorded in file will have the pending status unless McQueen chooses
+        # to change status to done
+        for i in range(len(tasks)):
+            f.write(f"{i+1}) ")
+            f.write(tasks[i] + "\n")
+            f.write("Pending \n")
 
 #because there is no need to inspect lines or edit them, using f.read() is enough for just viewing the list as a block.
 def view_list():
@@ -43,11 +45,11 @@ def add_task(task):
 def mark_as_done(task_number):
     with open(filename, "r") as f:
         lines = f.readlines()
-        stat_idx = (task_number - 1)* 2 + 1
+        status = (task_number - 1)* 2 + 2
 
-        if stat_idx >= 0 and stat_idx< len(lines) :
+        if status >= 0 and status< len(lines) :
             #overwrite pending into a done
-            lines[stat_idx] = "Done \n"
+            lines[status] = "Done \n"
             #rewrite the whole lines back into the folder
             with open(filename, "w") as f:
                 f.writelines(lines)
@@ -61,11 +63,22 @@ def mark_as_done(task_number):
 def remove_task(task_number):
     with open(filename, "r") as f:
             lines = f.readlines()
-            stat_idx = (task_number - 1)* 2 + 1
+            text_index = (task_number - 1)* 2 + 1
+            status = text_index + 1
     
-            if stat_idx >= 0 and stat_idx< len(lines):
-                text_idx = stat_idx - 1
-                del lines[text_idx:stat_idx+1]
+            if status >= 0 and status < len(lines):
+                task_index = status - 1
+                del lines[task_index:status +1]
+                #numbering new to avoid confusion
+                n = 1
+                for i in range(1, len(lines), 2):
+                    # parition function that disregards ) and the space after it, keeping only task description
+                    # then the numbers are rewritten and the n is incremented
+                    _, _, task_text = lines[i].partition(") ")  
+                    lines[i] = f"{n}) {task_text}"
+                    n += 1
+                    
+
                 with open(filename, "w") as f:
                     f.writelines(lines)
                 print("Lighter workload achieved, boss!")
