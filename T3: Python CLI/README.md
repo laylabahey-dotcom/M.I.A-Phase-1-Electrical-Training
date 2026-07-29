@@ -19,6 +19,7 @@ Challenges:
 I found a solution in a community blog, where importing a library called OS and specifying that the text file should always be saved with the script file made it easier for anyone using the code to have same results as I did.
 4) Making sure that the progress is not overwritten each time
 I used wrong identifiers in the file functions "a" instead of "w" or "r" until I gathered what was the problem and fixed that.
+5) Renumbering entire text file after removing task. First was to partition or split the task description from the number and ')'. Then the renumbering itself was easy enough through a for loop. I found the function on stackoverflow.
 
 
 
