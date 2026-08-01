@@ -9,40 +9,49 @@ class Vehicle:
         self.set_capacity(capacity) #encapsulation
         # type as subclass
 
+   def get_racing_team(self):
+        return self.__racing_team
+
+    def set_racing_team(self, racing_team):
+        self.__racing_team = racing_team
+
+    def get_full_name(self):
+        return self.__full_name
+
+    def set_full_name(self, full_name):
+        self.__full_name = full_name
+
     def get_car_number(self):
         return self.__car_number
+
+    def set_car_number(self, car_number):
+        self.__car_number = car_number
 
     def get_age(self):
         return self.__age
 
     def set_age(self, age):
-        while True: 
-            age = int(input("Enter age: "))
-            if age => 0:
-                break
-            print("Age cannot be negative!")
+        if age < 0:
+            break
+        print("Age cannot be negative!")
         self.__age = age
 
     def get_speed(self):
         return self.__speed
 
     def set_speed(self, speed):
-        while True: 
-            speed = int(input("Enter speed: "))
-            if speed => 0:
-                break
-            print("Speed cannot be negative!")
+        if speed < 0:
+            break
+        print("Speed cannot be negative!")
         self.__speed = speed
 
     def get_capacity(self):
         return self.__capacity
 
     def set_capacity(self, capacity):
-        while True: 
-            capacity = int(input("Enter capacity: "))
-            if capacity => 0:
-                break
-            print("Capacity cannot be negative!")
+        if capacity < 0:
+            break
+        print("Capacity cannot be negative!")
         self.__capacity = capacity
         
     #polymorphism, define preformance score function in vehicle class and then let each subclass calculate it differently
@@ -63,7 +72,7 @@ class Racer(Vehicle):
         self.num_completed_races = num_completed_races
         self.num_completed_laps = num_completed_laps
     def get_preformance_score(self):
-        return (self.get_speed() * 10) + self.get_capacity
+        return (self.get_speed() * 10) + self.get_capacity()
     #additional attributes of racer car displayed
     def display_info(self):
         super().display_info()
@@ -78,7 +87,7 @@ class SupportVehicle(Vehicle):
         self.crew_size = crew_size
         self.reliability_rating = reliability_rating
     def get_preformance_score(self):
-        return (self.get_speed() * 5) + (self.get_capacity * 5)
+        return (self.get_speed() * 5) + (self.get_capacity() * 5)
     #additional attributes of support car displayed
     def display_info(self):
         super().display_info()
