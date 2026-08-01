@@ -311,7 +311,7 @@ def garage_report():
 
 #recurring menu
 while True:
-    print("     WELCOME TO THE BRAND NEW GARAGE MANAGEMENT SYSTEM       \n")
+    print("\n     WELCOME TO THE BRAND NEW GARAGE MANAGEMENT SYSTEM       \n")
     print("1) Check in a car")
     print("2) View Garage")
     print("3) Tune-up your car")
