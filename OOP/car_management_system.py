@@ -4,7 +4,6 @@ import json
 script_dir = os.path.dirname(os.path.abspath(__file__))
 filename = os.path.join(script_dir, "garage.json")
 
-#OOP 
 #similar to defining a struct in C/C++ 
 #class definition and functions
 class Vehicle:
@@ -113,8 +112,60 @@ class SupportVehicle(Vehicle):
 #Start operations
 #need an empty list where the vehicles could be stored
 
-#list whose elements aren't the actual information of the vehicles, but they store the pointers that point towards the objects with determined info
 garage = []
+
+def save_garage():
+    #empty list that will hold all vehicles
+    data = []
+    for vehicle in garage:
+        data.append(vehicle.__dict__) #stores all object attributes to one place, a dictionary because
+        #it stores the information key:value (geekforgeeks)
+
+    with open(filename, "w") as file:
+        json.dump(data, file, indent=4) 
+
+
+def load_garage():
+    #open as read file
+    with open(filename, "r") as file:
+        #store file as python list
+        #each item represents one vehicle
+        data = json.load(file)
+
+    #happened duplicates, so had to clear garage before it loads
+    garage.clear()
+
+    #for loop through each dictionary that was read from file
+    for item in data:
+        #check if the dict represents a racer or not, then create new object and lored values stored in dict
+        if "num_completed_races" in item:
+            vehicle = Racer(
+                item["_Vehicle__car_number"],
+                item["_Vehicle__full_name"],
+                item["_Vehicle__age"],
+                item["_Vehicle__racing_team"],
+                item["_Vehicle__speed"],
+                item["_Vehicle__capacity"],
+                item["num_completed_races"],
+                item["num_completed_laps"]
+            )
+        else:
+
+            vehicle = SupportVehicle(
+                item["_Vehicle__car_number"],
+                item["_Vehicle__full_name"],
+                item["_Vehicle__age"],
+                item["_Vehicle__racing_team"],
+                item["_Vehicle__speed"],
+                item["_Vehicle__capacity"],
+                item["crew_size"],
+                item["reliability_rating"]
+            )
+
+        garage.append(vehicle)
+
+#load saved cars when the prorgram starts
+load_garage()
 
 def check_in_car():
     #user enters car ID
@@ -145,6 +196,8 @@ def check_in_car():
 
         #add the vehicle to the garage list
         garage.append(vehicle)
+        #save the new changes
+        save_garage()
 
 #display each car in garage with the for-loop
 def view_garage():
@@ -178,6 +231,8 @@ def tune_up():
     #error message
     if found == 0:
         print("Vehicle ID not found!")
+    #save the new changes
+    save_garage()
 
 def retire_car():
     found = 0
@@ -192,7 +247,9 @@ def retire_car():
             view_garage()
     #error message
     if found == 0:
-            print("Vehicle ID not found! Garage unchanged.")  
+            print("Vehicle ID not found! Garage unchanged.") 
+    #save the new changes
+    save_garage()
 
 def find_car():
     found = 0
