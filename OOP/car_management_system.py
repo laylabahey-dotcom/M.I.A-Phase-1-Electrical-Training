@@ -1,4 +1,11 @@
-#OOP 
+#this library + commands to save the textfile to wherever the script is
+import os
+import json
+script_dir = os.path.dirname(os.path.abspath(__file__))
+filename = os.path.join(script_dir, "garage.json")
+
+
+OOP 
 class Vehicle:
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity):
         self.__car_number = car_number
