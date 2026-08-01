@@ -4,7 +4,6 @@ import json
 script_dir = os.path.dirname(os.path.abspath(__file__))
 filename = os.path.join(script_dir, "garage.json")
 
-
 #OOP 
 #similar to defining a struct in C/C++ 
 #class definition and functions
@@ -110,7 +109,6 @@ class SupportVehicle(Vehicle):
         print(f"Crew size:  {self.crew_size}")
         print(f"Reliability rating:  {self.reliability_rating}")
         print(f"Preformance score: {self.get_preformance_score()}" )
-
 
 #Start operations
 #need an empty list where the vehicles could be stored
@@ -228,15 +226,27 @@ def garage_report():
     #total number of cars & sum of all performance
     total_cars = 0
     sum_performance = 0
+    
     for vehicle in garage:
         total_cars = total_cars + 1
         sum_performance = sum_performance + vehicle.get_performance_score()
+        #get the racing team of current vehicle
+        team = vehicle.get_racing_team()
+        #start counting how many cars belong to team
+        count = 0
+        #loop again through garage
+        #compare each vehicle with the current team
+        for other_vehicle in garage:
+            #if this vehicle belongs to same team, increase count 
+            if other_vehicle.get_racing_team() == team:
+                count = count + 1
+        #adter checking every vehicle, print team and count
+        print(team, count)
+    
     #average of perfomance and output
     average_performance = sum_performance / total_cars
-    print(f"Your total sum of cars is {total_cars}")
-    print(f"Average performance: {average_performance}")
-    #how to classify racing teams --!
-
+    print(f"Your total sum of cars is {total_cars}\n")
+    print(f"Average performance: {average_performance}\n")
 
 #recurring menu
 while True:
