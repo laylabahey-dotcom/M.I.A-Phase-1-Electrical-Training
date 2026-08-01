@@ -119,9 +119,10 @@ class SupportVehicle(Vehicle):
 garage = []
 
 def check_in_car():
+    #user enters car ID
     car_num = int(input("Enter car number:"))
-    for Vehicle in garage: #could work like a incrementing loop, vehicle as increment and garage as the array
-        if Vehicle.get_car_number() == car_num: #not vehicle.car_number because it is private, so needs function to fetch it
+    for vehicle in garage: #could work like a incrementing loop, vehicle as increment and garage as the array
+        if vehicle.get_car_number() == car_num: #not vehicle.car_number because it is private, so needs function to fetch it
             print("Car number must be unique!")
             return
 
@@ -136,27 +137,29 @@ def check_in_car():
         completed_laps = int(input("Enter number of completed laps: "))
         completed_races = int(input("Enter number of completed races: "))
 
-        Vehicle = Racer(car_num, full_name, car_age, racing_team, speed, capacity, completed_races, completed_laps)
-        #like structural vhdl
+        vehicle = Racer(car_num, full_name, car_age, racing_team, speed, capacity, completed_races, completed_laps)
+        #like structural vhdl, just insert items into their respective blocks
     
     elif(car_type.lower() == "supporting"):
         crew_size = int(input("Enter crew size: "))
         reliability = int(input("Enter reliability rate (0-100): "))
-        Vehicle = SupportVehicle(car_num, full_name, car_age, racing_team, speed, capacity, crew_size, reliability)
+        vehicle = SupportVehicle(car_num, full_name, car_age, racing_team, speed, capacity, crew_size, reliability)
 
         #add the vehicle to the garage list
-        garage.append(Vehicle)
+        garage.append(vehicle)
 
-
+#display each car in garage with the for-loop
 def view_garage():
-        for vehicle in garage:
-            vehicle.display_info() #method within a class, so i have to call on object to be able to implement it (object = vehicle)
+    for vehicle in garage:
+        vehicle.display_info() #method within a class, so i have to call on object to be able to implement it (object = vehicle)
 
 def tune_up():
     found = 0
     car_num = int(input("Enter the number of the car you want to tune up: "))
     for vehicle in garage:
+        #find the car through ID
         if vehicle.get_car_number() == car_num:
+            #if found, take from user and set all the new values to object
             found = 1
             vehicle.display_info()
             print("Enter your changes now!")
@@ -170,21 +173,26 @@ def tune_up():
             vehicle.set_speed(speed)
             capacity = int(input("Enter capacity of car: "))
             vehicle.set_capacity(capacity)
+            #confirmation message and display the changes
             print("Your new and improved vehicle specs!")
             vehicle.display_info()
             break
+    #error message
     if found == 0:
         print("Vehicle ID not found!")
 
 def retire_car():
     found = 0
     car_num = int(input("Enter the number of the car you want to tune up: "))
+    #increment vehicle, and when found, the i of that vehicle will be deleted. deleting the pointer of the wanted object
     for i, vehicle in garage:
         if vehicle.get_car_number() == car_num:
             found = 1
             del garage[i]  #delete the index where the car is stored in the list, because the array stores the pointer that points to the objects, not actual objects
+            #confirmation message & display the changes
             print("Your new and improved garage!")
             view_garage()
+    #error message
     if found == 0:
             print("Vehicle ID not found! Garage unchanged.")  
 
@@ -192,9 +200,11 @@ def find_car():
     found = 0
     choice = int(input("Would you like to 1) search by name or 2) search by car number? (1 or 2): "))
 
+    #choice determination --> name
     if(choice == 1):
         name = input("Enter name of the car: ")
         for vehicle in garage:
+            #lower both so that they could  be compared
             if vehicle.get_full_name().lower() == name.lower():
                 found = 1
                 print("Found your car!")
@@ -202,6 +212,7 @@ def find_car():
                 break
         if found == 0:
             print("Vehicle not found!")
+    #choice determination --> ID  
     elif(choice == 2):
         car_num = int(input("Enter the number of the car: "))
         for vehicle in garage:
@@ -227,7 +238,7 @@ def garage_report():
     #how to classify racing teams --!
 
 
-
+#recurring menu
 while True:
     print("     WELCOME TO THE BRAND NEW GARAGE MANAGEMENT SYSTEM       \n")
     print("1) Check in a car\n")
