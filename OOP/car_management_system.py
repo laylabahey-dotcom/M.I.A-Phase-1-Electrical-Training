@@ -207,3 +207,47 @@ def garage_report():
     print(f"Your total sum of cars is {total_cars}")
     print(f"Average performance: {average_performance}")
     #how to classify racing teams --!
+
+
+
+while True:
+    print("     WELCOME TO THE BRAND NEW GARAGE MANAGEMENT SYSTEM       \n")
+    print("1) Check in a car\n")
+    print("2) View Garage\n")
+    print("3) Tune-up your car\n")
+    print("4) Retire car\n")
+    print("5) Find a car\n")
+    print("6) See garage report\n")
+    print("7) Quit")
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        print("Golly! A new car!\n")
+        check_in_car()
+        print("New car checked in!\n")
+    elif choice == 2:
+        print("Let's see that garage!\n")
+        view_garage()
+        print("Isn't it beautiful?")
+    elif choice == 3:
+        print("Tune up that car!")
+        tune_up()
+        print("Serious updates done!")
+    elif choice == 4:
+        print("Want to retire a car? Oh well, let's do it.")
+        retire_car()
+        print("Always sad to see a car go.")
+    elif choice == 5:
+        print("I'll find that car for ya!")
+        find_car()
+        print("Mission accomplished!")
+    elif choice == 6:
+        print("Of course you wanna see our amazing garage!")
+        garage_report()
+        print("Garage report delivered!")
+    elif choice == 7:
+        print("Hope you had a lovely garage experience! Goodbye.")
+        break
+    else:
+        print("Invalid choice!")
+        return
