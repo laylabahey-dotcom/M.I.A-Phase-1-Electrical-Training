@@ -24,9 +24,6 @@ class Vehicle:
     def get_car_number(self):
         return self.__car_number
 
-    def set_car_number(self, car_number):
-        self.__car_number = car_number
-
     def get_age(self):
         return self.__age
 
@@ -137,4 +134,27 @@ def view_garage():
         for vehicle in garage:
             vehicle.display_info() #method within a class, so i have to call on object to be able to implement it (object = vehicle)
 
+def tune_up():
+    found = 0
+    car_num = int(input("Enter the number of the car you want to tune up: "))
+    for vehicle in garage:
+        if vehicle.get_car_number() == car_num:
+            found = 1
+            vehicle.display_info()
+            print("Enter your changes now!")
+            full_name = input("Enter full name: ")
+            vehicle.set_full_name(full_name)
+            car_age = int(input("Enter the car age: "))
+            vehicle.set_age(car_age)
+            racing_team = input("Enter racing team name: ")
+            vehicle.set_racing_team(racing_team)
+            speed = int(input("Enter speed of car: "))
+            vehicle.set_speed(speed)
+            capacity = int(input("Enter capacity of car: "))
+            vehicle.set_capacity(capacity)
+            print("Your new and improved vehicle specs!")
+            vehicle.display_info()
+            break
+    if found == 0:
+        print("Vehicle ID not found!")
 
