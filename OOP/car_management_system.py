@@ -9,6 +9,9 @@ class Vehicle:
         self.set_capacity(capacity) #encapsulation
         # type as subclass
 
+    def get_car_number(self):
+        return self.__car_number
+
     def get_age(self):
         return self.__age
 
@@ -84,6 +87,41 @@ class SupportVehicle(Vehicle):
         print(f"Reliability rating:  {self.reliability_rating}")
         print(f"Preformance score: {self.get_preformance_score()}" )
 
- 
+
+#Start operations
+#Check in A Car
+
+#need an empty list where the vehicles could be stored
+garage = []
+
+def check_in_car():
+    car_num = int(input("Enter car number:"))
+    for Vehicle in garage: #could work like a incrementing loop, vehicle as increment and garage as the array
+        if Vehicle.get.__car_number() == car_num: #not vehicle.car_number because it is private, so needs function to fetch it
+            print("Car number must be unique!")
+            return
+
+    full_name = input("Enter full name: ")
+    car_age = int(input("Enter the car age: "))
+    racing_team = input("Enter racing team name: ")
+    speed = int(input("Enter speed of car: "))
+    capacity = int(input("Enter capacity of car: "))
+
+    car_type = input("Enter car type (racer/supporting): ")
+    if(car_type.lower() == "racer"):
+        completed_laps = int(input("Enter number of completed laps: "))
+        completed_races = int(input("Enter number of completed races: "))
+
+        Vehicle = Racer(car_num, full_name, car_age, racing_team, speed, capacity, completed_races, completed_laps)
+        #like structural vhdl
+    
+    elif(car_type.lower() == "supporting"):
+        crew_size = int(input("Enter crew size: "))
+        reliability = int(input("Enter reliability rate (0-100): "))
+        Vehicle = SupportVehicle(car_num, full_name, car_age, racing_team, speed, capacity, crew_size, reliability)
+
+    #add the vehicle to the garage list
+    garage.append(Vehicle)
+
 
 
