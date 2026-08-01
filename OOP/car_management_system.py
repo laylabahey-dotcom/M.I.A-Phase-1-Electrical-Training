@@ -232,6 +232,7 @@ def check_in_car():
 def view_garage():
     for vehicle in garage:
         vehicle.display_info() #method within a class, so i have to call on object to be able to implement it (object = vehicle)
+        print("\n)
 
 def tune_up():
     found = 0
@@ -243,7 +244,6 @@ def tune_up():
         if vehicle.get_car_number() == car_num:
             #if found, take from user and set all the new values to object
             found = 1
-            vehicle.display_info()
             print("Enter your changes now!")
             full_name = input("Enter full name: ")
             vehicle.set_full_name(full_name)
