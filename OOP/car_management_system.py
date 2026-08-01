@@ -169,3 +169,15 @@ def retire_car():
             view_garage()
     if found == 0:
             print("Vehicle ID not found! Garage unchanged.")  
+
+def find_car():
+    found = 0
+    car_num = int(input("Enter the number of the car you want to find: "))
+    for vehicle in garage:
+        if vehicle.get_car_number() == car_num:
+            found = 1
+            print("Found your car!")
+            vehicle.display_info()
+            break
+    if found == 0:
+        print("Vehicle not found!")
