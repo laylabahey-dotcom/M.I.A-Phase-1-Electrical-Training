@@ -123,5 +123,8 @@ def check_in_car():
     #add the vehicle to the garage list
     garage.append(Vehicle)
 
+ def view_garage():
+        for vehicle in garage:
+            vehicle.display_info() #method within a class, so i have to call on object to be able to implement it (object = vehicle)
 
 
