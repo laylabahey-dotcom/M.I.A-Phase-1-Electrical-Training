@@ -29,8 +29,8 @@ class Vehicle:
 
     def set_age(self, age):
         if age < 0:
-            break
-        print("Age cannot be negative!")
+            print("Age cannot be negative!")
+            return
         self.__age = age
 
     def get_speed(self):
@@ -38,8 +38,8 @@ class Vehicle:
 
     def set_speed(self, speed):
         if speed < 0:
-            break
-        print("Speed cannot be negative!")
+            print("Speed cannot be negative!")
+            return
         self.__speed = speed
 
     def get_capacity(self):
@@ -47,8 +47,8 @@ class Vehicle:
 
     def set_capacity(self, capacity):
         if capacity < 0:
-            break
-        print("Capacity cannot be negative!")
+            print("Capacity cannot be negative!")
+            return
         self.__capacity = capacity
         
     #polymorphism, define preformance score function in vehicle class and then let each subclass calculate it differently
