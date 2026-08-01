@@ -41,19 +41,48 @@ class Vehicle:
                 break
             print("Capacity cannot be negative!")
         self.__capacity = capacity
+        
+    #polymorphism, define preformance score function in vehicle class and then let each subclass calculate it differently
+    def get_preformance_score(self):
+        pass
+    #polymorphism, define display and let each subclass display different attributes
+    def display_info(self):
+        print(f"Car Number: {self.__car_number}")
+        print(f"Full Name: {self.__full_name}")
+        print(f"Age: {self.get_age()}")
+        print(f"Racing Team: {self.__racing_team}")
+        print(f"Speed: {self.get_speed()}")
+        print(f"Capacity: {self.get_capacity()}")
 
 class Racer(Vehicle):
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity, num_completed_races, num_completed_laps):
         super().__init__(car_number, full_name, age,racing_team, speed, capacity)
         self.num_completed_races = num_completed_races
         self.num_completed_laps = num_completed_laps
+    def get_preformance_score(self):
+        return (self.get_speed() * 10) + self.get_capacity
+    #additional attributes of racer car displayed
+    def display_info(self):
+        super().display_info()
+        print(f"Type: Racer")
+        print(f"Number of completed races:  {self.num_completed_races}")
+        print(f"Number of completed laps:  {self.num_completed_laps}")
+        print(f"Preformance score:  {self.get_preformance_score()}")
 
 class SupportVehicle(Vehicle):
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity, crew_size, reliability_rating):
         super().__init__(car_number, full_name, age,racing_team, speed, capacity)
         self.crew_size = crew_size
         self.reliability_rating = reliability_rating
-
+    def get_preformance_score(self):
+        return (self.get_speed() * 5) + (self.get_capacity * 5)
+    #additional attributes of support car displayed
+    def display_info(self):
+        super().display_info()
+        print(f"Type: Support Vehicle")
+        print(f"Crew size:  {self.crew_size}")
+        print(f"Reliability rating:  {self.reliability_rating}")
+        print(f"Preformance score: {self.get_preformance_score()}" )
 
  
 
