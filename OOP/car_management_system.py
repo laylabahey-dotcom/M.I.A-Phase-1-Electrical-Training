@@ -242,7 +242,8 @@ def retire_car():
     found = 0
     car_num = int(input("Enter the number of the car you want to tune up: "))
     #increment vehicle, and when found, the i of that vehicle will be deleted. deleting the pointer of the wanted object
-    for i, vehicle in garage:
+    for i, vehicle in enumerate(garage):
+        #enumerate so that every vehicle/car gets an index and can be removed from file too
         if vehicle.get_car_number() == car_num:
             found = 1
             del garage[i]  #delete the index where the car is stored in the list, because the array stores the pointer that points to the objects, not actual objects
