@@ -208,6 +208,8 @@ def view_garage():
 
 def tune_up():
     found = 0
+    #show the whole garage to choose from
+    view_garage()
     car_num = int(input("Enter the number of the car you want to tune up: "))
     for vehicle in garage:
         #find the car through ID
@@ -310,21 +312,21 @@ def garage_report():
 #recurring menu
 while True:
     print("     WELCOME TO THE BRAND NEW GARAGE MANAGEMENT SYSTEM       \n")
-    print("1) Check in a car\n")
-    print("2) View Garage\n")
-    print("3) Tune-up your car\n")
-    print("4) Retire car\n")
-    print("5) Find a car\n")
-    print("6) See garage report\n")
+    print("1) Check in a car")
+    print("2) View Garage")
+    print("3) Tune-up your car")
+    print("4) Retire car")
+    print("5) Find a car")
+    print("6) See garage report")
     print("7) Quit")
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
-        print("Golly! A new car!\n")
+        print("Golly! A new car!")
         check_in_car()
-        print("New car checked in!\n")
+        print("New car checked in!")
     elif choice == 2:
-        print("Let's see that garage!\n")
+        print("Let's see that garage!")
         view_garage()
         print("Isn't it beautiful?")
     elif choice == 3:
