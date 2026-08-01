@@ -109,6 +109,20 @@ class SupportVehicle(Vehicle):
         print(f"Reliability rating:  {self.reliability_rating}")
         print(f"Preformance score: {self.get_preformance_score()}" )
 
+#BONUS - Ambulance
+class Ambulance(Vehicle):
+    def __init__(self, car_number, full_name, age, racing_team, speed, capacity, save_rate):
+            super().__init__(car_number, full_name, age, racing_team, speed, capacity)
+            self.save_rate = save_rate
+    def get_preformance_score(self):
+        return (self.get_speed() * 10) + (self.get_capacity() * 10)
+        #additional attributes of support car displayed
+    def display_info(self):
+        super().display_info()
+        print(f"Type: Ambulance")
+        print(f"Saving Lives rate:  {self.save_rate}")
+        print(f"Preformance score: {self.get_preformance_score()}" )
+
 #Start operations
 #need an empty list where the vehicles could be stored
 
@@ -151,19 +165,28 @@ def load_garage():
                 item["num_completed_races"],
                 item["num_completed_laps"]
             )
-        else:
-
+        elif "crew_size" in item:
             vehicle = SupportVehicle(
-                item["_Vehicle__car_number"],
+                item["_Vehicle__car_number"], #private
                 item["_Vehicle__full_name"],
                 item["_Vehicle__age"],
                 item["_Vehicle__racing_team"],
                 item["_Vehicle__speed"],
                 item["_Vehicle__capacity"],
-                item["crew_size"],
+                item["crew_size"], #public
                 item["reliability_rating"]
             )
-
+        #BONUS
+        else:
+            vehicle = Ambulance(
+                item["_Vehicle__car_number"], #private
+                item["_Vehicle__full_name"],
+                item["_Vehicle__age"],
+                item["_Vehicle__racing_team"],
+                item["_Vehicle__speed"],
+                item["_Vehicle__capacity"],
+                item["save_rate"], #public
+            )
         garage.append(vehicle)
 
 #load saved cars when the prorgram starts
@@ -195,6 +218,10 @@ def check_in_car():
         crew_size = int(input("Enter crew size: "))
         reliability = int(input("Enter reliability rate (0-100): "))
         vehicle = SupportVehicle(car_num, full_name, car_age, racing_team, speed, capacity, crew_size, reliability)
+
+    elif(car_type.lower() == "ambulance"):
+        save_rate = int(input("Enter save lives rate: "))
+        vehicle = Ambulance(car_num, full_name, car_age, racing_team, speed, capacity, save_rate)
 
     #add the vehicle to the garage list
     garage.append(vehicle)
@@ -254,6 +281,7 @@ def retire_car():
     if found == 0:
             print("Vehicle ID not found! Garage unchanged.") 
     #save the new changes
+    view_garage()
     save_garage()
 
 def find_car():
