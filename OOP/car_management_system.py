@@ -194,3 +194,16 @@ def find_car():
                 break
         if found == 0:
             print("Vehicle not found!")
+
+def garage_report():
+    #total number of cars & sum of all performance
+    total_cars = 0
+    sum_performance = 0
+    for vehicle in garage:
+        total_cars = total_cars + 1
+        sum_performance = sum_performance + vehicle.get_performance_score()
+    #average of perfomance and output
+    average_performance = sum_performance / total_cars
+    print(f"Your total sum of cars is {total_cars}")
+    print(f"Average performance: {average_performance}")
+    #how to classify racing teams --!
