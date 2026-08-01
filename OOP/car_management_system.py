@@ -106,7 +106,7 @@ garage = []
 def check_in_car():
     car_num = int(input("Enter car number:"))
     for Vehicle in garage: #could work like a incrementing loop, vehicle as increment and garage as the array
-        if Vehicle.get.__car_number() == car_num: #not vehicle.car_number because it is private, so needs function to fetch it
+        if Vehicle.get_car_number() == car_num: #not vehicle.car_number because it is private, so needs function to fetch it
             print("Car number must be unique!")
             return
 
