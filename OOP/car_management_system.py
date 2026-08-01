@@ -307,8 +307,8 @@ def garage_report():
     
     #average of perfomance and output
     average_performance = sum_performance / total_cars
-    print(f"Your total sum of cars is {total_cars}\n")
-    print(f"Average performance: {average_performance}\n")
+    print(f"Your total sum of cars is {total_cars}")
+    print(f"Average performance: {average_performance}")
 
 #recurring menu
 while True:
