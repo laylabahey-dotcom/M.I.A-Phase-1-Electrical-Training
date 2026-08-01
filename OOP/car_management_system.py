@@ -5,10 +5,14 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 filename = os.path.join(script_dir, "garage.json")
 
 
-OOP 
+#OOP 
+#similar to defining a struct in C/C++ 
+#class definition and functions
 class Vehicle:
+    #attributes of superclass declared here
+    #self points at the class created beforehand
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity):
-        self.__car_number = car_number
+        self.__car_number = car_number #private information, not available for public viewing
         self.__full_name = full_name
         self.set_age(age) #encapsulation --> protect data, so age can't be -5 or smth like that
         self.__racing_team = racing_team
@@ -16,6 +20,7 @@ class Vehicle:
         self.set_capacity(capacity) #encapsulation
         # type as subclass
 
+    #setters and getters to read and update information thats privated --> encapsulation
    def get_racing_team(self):
         return self.__racing_team
 
@@ -70,11 +75,16 @@ class Vehicle:
         print(f"Speed: {self.get_speed()}")
         print(f"Capacity: {self.get_capacity()}")
 
+#define subclass of vehicle
 class Racer(Vehicle):
+    #define all combined attributes
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity, num_completed_races, num_completed_laps):
+        #call only superclass attributes
         super().__init__(car_number, full_name, age,racing_team, speed, capacity)
+        #set/initialise the subclass specific attributes
         self.num_completed_races = num_completed_races
         self.num_completed_laps = num_completed_laps
+    #polymorphism continuation, func passed in superclass redefined here for the subclass
     def get_preformance_score(self):
         return (self.get_speed() * 10) + self.get_capacity()
     #additional attributes of racer car displayed
@@ -85,6 +95,7 @@ class Racer(Vehicle):
         print(f"Number of completed laps:  {self.num_completed_laps}")
         print(f"Preformance score:  {self.get_preformance_score()}")
 
+#repeat as subclass before, just with this subclass' specific attributes & preformance score and display
 class SupportVehicle(Vehicle):
     def __init__(self, car_number, full_name, age, racing_team, speed, capacity, crew_size, reliability_rating):
         super().__init__(car_number, full_name, age,racing_team, speed, capacity)
@@ -102,9 +113,9 @@ class SupportVehicle(Vehicle):
 
 
 #Start operations
-#Check in A Car
-
 #need an empty list where the vehicles could be stored
+
+#list whose elements aren't the actual information of the vehicles, but they store the pointers that point towards the objects with determined info
 garage = []
 
 def check_in_car():
