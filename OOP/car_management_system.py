@@ -120,8 +120,8 @@ def check_in_car():
         reliability = int(input("Enter reliability rate (0-100): "))
         Vehicle = SupportVehicle(car_num, full_name, car_age, racing_team, speed, capacity, crew_size, reliability)
 
-    #add the vehicle to the garage list
-    garage.append(Vehicle)
+        #add the vehicle to the garage list
+        garage.append(Vehicle)
 
  def view_garage():
         for vehicle in garage:
