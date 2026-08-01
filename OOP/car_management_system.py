@@ -172,12 +172,25 @@ def retire_car():
 
 def find_car():
     found = 0
-    car_num = int(input("Enter the number of the car you want to find: "))
-    for vehicle in garage:
-        if vehicle.get_car_number() == car_num:
-            found = 1
-            print("Found your car!")
-            vehicle.display_info()
-            break
-    if found == 0:
-        print("Vehicle not found!")
+    choice = int(input("Would you like to 1) search by name or 2) search by car number? (1 or 2): "))
+
+    if(choice == 1):
+        name = input("Enter name of the car: ")
+        for vehicle in garage:
+            if vehicle.get_full_name().lower() == name.lower():
+                found = 1
+                print("Found your car!")
+                vehicle.display_info()
+                break
+        if found == 0:
+            print("Vehicle not found!")
+    elif(choice == 2):
+        car_num = int(input("Enter the number of the car: "))
+        for vehicle in garage:
+            if vehicle.get_car_number() == car_num:
+                found = 1
+                print("Found your car!")
+                vehicle.display_info()
+                break
+        if found == 0:
+            print("Vehicle not found!")
