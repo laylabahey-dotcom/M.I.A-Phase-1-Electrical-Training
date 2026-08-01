@@ -158,3 +158,14 @@ def tune_up():
     if found == 0:
         print("Vehicle ID not found!")
 
+def retire_car():
+    found = 0
+    car_num = int(input("Enter the number of the car you want to tune up: "))
+    for i, vehicle in garage:
+        if vehicle.get_car_number() == car_num:
+            found = 1
+            del garage[i]  #delete the index where the car is stored in the list, because the array stores the pointer that points to the objects, not actual objects
+            print("Your new and improved garage!")
+            view_garage()
+    if found == 0:
+            print("Vehicle ID not found! Garage unchanged.")  
