@@ -126,6 +126,8 @@ def save_garage():
 
 
 def load_garage():
+    if not os.path.exists(filename):
+        return
     #open as read file
     with open(filename, "r") as file:
         #store file as python list
